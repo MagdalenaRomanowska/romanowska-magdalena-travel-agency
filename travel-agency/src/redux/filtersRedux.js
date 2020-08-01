@@ -34,14 +34,18 @@ export default function reducer(statePart = [], action = {}) {
     }
     case CHANGE_DURATION_FROM: {
       return {
-        ...statePart,
-        duration: {from:action.payload},
+        ...statePart, //wypakowuję stary obiekt do nowego. coś jak kopiowanie.
+        duration: { 
+          ...statePart.duration,   //rozpakowuję stare duration do nowego duration.
+          from: action.payload },  //nadpisuję from przez nową wartość.
       };
     }
     case CHANGE_DURATION_TO: {
       return {
         ...statePart,
-        duration: {to:action.payload},
+        duration: {
+          ...statePart.duration, 
+          to:action.payload},
       };
     }
 
