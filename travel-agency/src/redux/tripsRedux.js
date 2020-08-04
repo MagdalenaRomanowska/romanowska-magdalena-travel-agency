@@ -15,24 +15,40 @@ export const getFilteredTrips = ({trips, filters}) => {
   if(filters.duration){
     const durationTime = filters.duration;
     const durationTimeFrom = filters.duration.from;
-    console.log('durationTimeFrom:', durationTimeFrom);
     const durationTimeTo = filters.duration.to;
-    console.log('durationTimeTo:', durationTimeTo);
     console.log('durationTime:', durationTime);
     output = output.filter(trip => trip.days >= durationTimeFrom && trip.days <= durationTimeTo);
-  //   const pattern = new RegExp(filters.duration, 'i');
-  //   output = output.filter(trip => pattern.test(trip.name));
   }
    
   // TODO - filter by tags
   if(filters.tags){
-    const firstTag = filters.tags[0];
-    output = output.filter(trip => trip.tags.includes(firstTag));
+    for (let i=0; i <= filters.tags.length-1; i++){
+      const Tag = filters.tags[i];
+      output = output.filter(trip => trip.tags.includes(Tag));
+    }
   }
   // TODO - sort by cost descending (most expensive goes first)
+  output = output.sort(compareTrips);
 
   return output;
 };
+
+function compareTrips(trip1, trip2) { //porównuję 2 tripy dla sortowania.
+  let replacedDollarSignTrip1 = trip1.cost.replace('$', ''); //zamieniam stringi na liczby.
+  let replacedDollarSignTrip2 = trip2.cost.replace('$', '');
+  let replacedCommaAndDollarSignTrip1 = replacedDollarSignTrip1.replace(',', '');//zamieniam stringi na liczby.
+  let replacedCommaAndDollarSignTrip2 = replacedDollarSignTrip2.replace(',', '');
+  let a = replacedCommaAndDollarSignTrip1 *1; //mnożę razy 1 dla pewności że to liczba.
+  let b = replacedCommaAndDollarSignTrip2 *1;
+
+  if (a > b){
+    return -1;
+  }
+  if (a < b){
+    return 1;
+  }
+  return 0;
+}
 
 export const getTripById = ({trips}, tripId) => {
   const filtered = trips.filter(trip => trip.id == tripId);
