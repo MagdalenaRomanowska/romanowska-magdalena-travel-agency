@@ -23,8 +23,8 @@ export const getFilteredTrips = ({trips, filters}) => {
   // TODO - filter by tags
   if(filters.tags){
     for (let i=0; i <= filters.tags.length-1; i++){
-      const Tag = filters.tags[i];
-      output = output.filter(trip => trip.tags.includes(Tag));
+      const tag = filters.tags[i];
+      output = output.filter(trip => trip.tags.includes(tag));
     }
   }
   // TODO - sort by cost descending (most expensive goes first)
@@ -34,17 +34,17 @@ export const getFilteredTrips = ({trips, filters}) => {
 };
 
 function compareTrips(trip1, trip2) { //porównuję 2 tripy dla sortowania.
-  let replacedDollarSignTrip1 = trip1.cost.replace('$', ''); //zamieniam stringi na liczby.
-  let replacedDollarSignTrip2 = trip2.cost.replace('$', '');
-  let replacedCommaAndDollarSignTrip1 = replacedDollarSignTrip1.replace(',', '');//zamieniam stringi na liczby.
-  let replacedCommaAndDollarSignTrip2 = replacedDollarSignTrip2.replace(',', '');
-  let a = replacedCommaAndDollarSignTrip1 *1; //mnożę razy 1 dla pewności że to liczba.
-  let b = replacedCommaAndDollarSignTrip2 *1;
+  let replacedDollar1 = trip1.cost.replace('$', ''); //zamieniam stringi na liczby.
+  let replacedDollar2 = trip2.cost.replace('$', '');
+  let replacedComma1 = replacedDollar1.replace(',', '');//zamieniam stringi na liczby.
+  let replacedComma2 = replacedDollar2.replace(',', '');
+  let trip01 = replacedComma1 *1; //mnożę razy 1 dla pewności że to liczba.
+  let trip02 = replacedComma2 *1;
 
-  if (a > b){
+  if (trip01 > trip02){
     return -1;
   }
-  if (a < b){
+  if (trip01 < trip02){
     return 1;
   }
   return 0;
