@@ -28,7 +28,7 @@ const OrderOptionCheckboxes = ({values, required, setOptionValue, currentValue})
       //Wykorzystujemy ten zabieg, ponieważ jeśli w pricing.json opcja ma ustawione "required": true, to powinny być do dyspozycji tylko wartości zdefiniowane w tym pliku. Jeśli jednak opcja nie jest wymagana, chcemy dodać <option>, który pozwoli na brak wyboru, czyli rezygnację z tej opcji.
     )}
     {values.map(value => (
-      <label key={value}>
+      <label key={value.id}>
         <input 
           value={value.id}
           type='checkbox' 
@@ -42,7 +42,7 @@ const OrderOptionCheckboxes = ({values, required, setOptionValue, currentValue})
 OrderOptionCheckboxes.propTypes = {
   values: PropTypes.any,
   required: PropTypes.any,
-  currentValue: PropTypes.func,
+  currentValue: PropTypes.any,
   setOptionValue: PropTypes.func,
 };
 

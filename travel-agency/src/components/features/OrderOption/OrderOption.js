@@ -26,7 +26,7 @@ const OrderOption = ({id, setOrderOption, name, type, ...otherProps}) => {
     return (
       <div className={styles.component}>
         <h3 className={styles.title}>{name}</h3>
-        <OptionComponent
+        <OptionComponent //ten komponent to tak naprawdę jedna z opcji zamówienia.
           {...otherProps} setOptionValue={value => setOrderOption({[id]: value})}
         //funkcja strzałkowa, która wywołuje funkcję setOrderOption, przekazując jej obiekt. W tym obiekcie jest jedna właściwość, której kluczem będzie zawartość zmiennej (a w tym wypadku – propsa) id, a wartością – argument funkcji strzałkowej.
         />
