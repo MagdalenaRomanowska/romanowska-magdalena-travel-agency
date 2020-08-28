@@ -1,1 +1,22 @@
 @import '../../../styles/settings.scss';
+
+.options {
+    margin-top: 48px;
+}
+
+.summary {
+    margin-top: 48px;
+}
+
+.total {
+    padding: 0 48px;
+    margin-top: 48px;
+    width: fit-content;
+    font-size: 36px;
+    border: solid 2px slategray;
+
+    &:hover {
+        background-color: silver;
+        //border-bottom: solid 2px slategray;
+    }
+}

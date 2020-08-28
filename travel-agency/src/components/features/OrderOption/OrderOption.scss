@@ -35,3 +35,9 @@
   display: flex;
   flex-direction: column;
 }
+
+.price {
+  display: inline-flex;
+  padding-left: 12px;
+  font-size: 14px;
+}
