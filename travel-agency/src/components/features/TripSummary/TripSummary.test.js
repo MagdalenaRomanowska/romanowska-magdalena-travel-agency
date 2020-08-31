@@ -18,15 +18,20 @@ describe('Component TripSummary', () => {
     expect(component.find('img').prop('src')).toEqual('expectedImage');
     expect(component.find('img').prop('alt')).toEqual('expectedName');
   });
-
+  
   //Polecenie: czy poprawnie renderują się propsy name, cost i days.
-  //   it('should render correct props: name, cost, days', () => {
-  //     const component = shallow(<TripSummary name='expectedName' days='11111' cost='99999' id='123' tags={[]} />);
-  //     expect(component.find('h3').text()).toEqual('expectedName'); //metoda text z dokumentacji enzymejs.github.io
-  //     expect(component.find('h3').text()).toEqual('expectedDays');
-  //     expect(component.find('h3').text()).toEqual('expectedCost');
-  //   });
+  it('should render correct props: name, cost, days', () => {
+    const component = shallow(<TripSummary name='expectedName' days='' cost='' id='123' tags={[]} />);
+    expect(component.find('h3').text()).toEqual('expectedName'); //metoda text z dokumentacji enzymejs.github.io
+    expect(component.find('span').at(0).text()).toEqual('days'); //
+    expect(component.find('span').at(1).text()).toEqual('from');
 
+  });
+
+  //Polecenie: czy jest wywoływany błąd w przypadku braku któregokolwiek z propsów: id, image, name, cost i days.
+  it('should throw error without required props', () => { //na podstawie Hero.test.js
+    expect(() => shallow(<TripSummary />)).toThrow();
+  });
 });
 
 

@@ -11,8 +11,8 @@ const TripSummary = ({id, image, name, cost, days, tags}) => (
         <img src={image} alt={name} />
         <h3 className={styles.title}>{name}</h3>
         <div className={styles.details}>
-          <span>{days} days</span>
-          <span>from {cost}</span>
+          <span>{days}days</span>
+          <span>from{cost}</span>
         </div>
         <div className={styles.tags}>
           {tags.map(tag => (
@@ -30,7 +30,7 @@ TripSummary.propTypes = {
   name: PropTypes.string,
   intro: PropTypes.string,
   cost: PropTypes.string,
-  days: PropTypes.number,
+  days: PropTypes.any,
   tags: PropTypes.array.isRequired,
 };
 
