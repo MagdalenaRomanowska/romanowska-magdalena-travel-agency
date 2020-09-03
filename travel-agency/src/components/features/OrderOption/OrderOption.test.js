@@ -193,7 +193,7 @@ for(let type in optionTypes){ //zapisuję typ opcji w zmiennej type.
 
       case 'date': {
         it('contains datepicker', () => { 
-          const datepicker = renderedSubcomponent.find('Datepicker'); 
+          const datepicker = renderedSubcomponent.find('.datepicker'); 
           expect(datepicker.length).toBe(1);
         });
         break;
