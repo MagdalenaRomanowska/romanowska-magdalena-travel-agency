@@ -61,7 +61,7 @@ const mockPropsForType = {//atrapy z Kodilli, zawiera propsy istotne tylko dla k
   
 const testValue = mockProps.values[1].id; // z Kodilli. Będziemy się starali, aby każdy subkomponent przyjął właśnie tę wartość. 
 //Zwróć uwagę, że testValue odwołuje się do id drugiego obiektu w mockProps.values, podczas gdy mockProps.currentValue jest równe id pierwszego obiektu. W ten sposób zasymulujemy sytuację, w której opcja ma już jakąś wartość, którą chcemy zmienić na inną (lub do której dodamy inną, w przypadku checkboxes).
-//const testValueNumber = 3; // z Kodilli. Będziemy się starali, aby każdy subkomponent przyjął właśnie tę wartość. 
+const testValueNumber = 3; // z Kodilli. Będziemy się starali, aby każdy subkomponent przyjął właśnie tę wartość. 
   
 
 for(let type in optionTypes){ //zapisuję typ opcji w zmiennej type.
@@ -146,6 +146,13 @@ for(let type in optionTypes){ //zapisuję typ opcji w zmiennej type.
           const icon = renderedSubcomponent.find('Icon');
           expect(icon.length).toBe(3); //1 Icon z komponentu, drugi Icon z komponentu 2 razy bo mockowanie po 2 wartościach.
         });
+
+        it('should run setOrderOption function on click', () => {
+          renderedSubcomponent.find('div').at(3).simulate('click');
+          expect(mockSetOrderOption).toBeCalledTimes(1); // toBeCalledTimes = toHaveBeenCalledTimes z dokumentacji Jest`a. Kodilla użyła aliasów, ponieważ są krótsze i bardziej czytelne.
+          expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue }); // toBeCalledWith = toHaveBeenCalledWith z dokumentacji Jest`a. Kodilla użyła aliasów, ponieważ są krótsze i bardziej czytelne.
+        });
+
         break;
       }
       case 'checkboxes': {
@@ -163,6 +170,8 @@ for(let type in optionTypes){ //zapisuję typ opcji w zmiennej type.
           const inputWithTypeCheckbox = renderedSubcomponent.find('input[type="checkbox"]');// podpowiedź z w/w strony Enzyme na przykładzie a[href="foo"]
           expect(inputWithTypeCheckbox.length).toBe(2);
         });
+        //zrobić test interakcji w piątek !!
+
         break;
       }
 
@@ -177,6 +186,12 @@ for(let type in optionTypes){ //zapisuję typ opcji w zmiennej type.
           const inputWithTypeNumber = renderedSubcomponent.find('input[type="number"]');// podpowiedź z w/w strony Enzyme na przykładzie a[href="foo"]
           expect(inputWithTypeNumber.length).toBe(1);
         });
+
+        it('should run setOrderOption function on change', () => {
+          renderedSubcomponent.find('input').simulate('change', {currentTarget: {value: testValueNumber}});
+          expect(mockSetOrderOption).toBeCalledTimes(1); 
+          expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValueNumber }); 
+        });
         break;
       }
 
@@ -188,6 +203,14 @@ for(let type in optionTypes){ //zapisuję typ opcji w zmiennej type.
           const inputWithTypeText = renderedSubcomponent.find('input');// podpowiedź z w/w strony Enzyme na przykładzie a[href="foo"]
           expect(inputWithTypeText.length).toBe(1);
         });
+
+        //NIE PRZECHODZI
+        it('should run setOrderOption function on change', () => {
+          renderedSubcomponent.find('input').simulate('change', {currentTarget: {value: testValue}});
+          expect(mockSetOrderOption).toBeCalledTimes(1); 
+          expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue }); 
+        });
+        
         break;
       }
 
@@ -196,6 +219,14 @@ for(let type in optionTypes){ //zapisuję typ opcji w zmiennej type.
           const datepicker = renderedSubcomponent.find('.datepicker'); 
           expect(datepicker.length).toBe(1);
         });
+
+        //NIE PRZECHODZI
+        //BEZ IMPORTU Datepickera ?.......
+        // it('should run setOrderOption function on change', () => {
+        //   renderedSubcomponent.find('.datepicker').simulate('change', testValue);
+        //   expect(mockSetOrderOption).toBeCalledTimes(1); 
+        //   expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue }); 
+        // });
         break;
       }
 
