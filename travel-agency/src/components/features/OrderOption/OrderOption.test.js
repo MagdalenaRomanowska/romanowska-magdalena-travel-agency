@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow/*, ShallowWrapper*/ } from 'enzyme';
 import OrderOption from './OrderOption';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 describe('Component OrderOption', () => {
   it('should render without crashing', () => {
@@ -127,7 +129,6 @@ for(let type in optionTypes){ //zapisuję typ opcji w zmiennej type.
           expect(mockSetOrderOption).toBeCalledTimes(1); // toBeCalledTimes = toHaveBeenCalledTimes z dokumentacji Jest`a. Kodilla użyła aliasów, ponieważ są krótsze i bardziej czytelne.
           expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue }); // toBeCalledWith = toHaveBeenCalledWith z dokumentacji Jest`a. Kodilla użyła aliasów, ponieważ są krótsze i bardziej czytelne.
         });
-
         break;
       }
 
@@ -152,9 +153,9 @@ for(let type in optionTypes){ //zapisuję typ opcji w zmiennej type.
           expect(mockSetOrderOption).toBeCalledTimes(1); // toBeCalledTimes = toHaveBeenCalledTimes z dokumentacji Jest`a. Kodilla użyła aliasów, ponieważ są krótsze i bardziej czytelne.
           expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue }); // toBeCalledWith = toHaveBeenCalledWith z dokumentacji Jest`a. Kodilla użyła aliasów, ponieważ są krótsze i bardziej czytelne.
         });
-
         break;
       }
+
       case 'checkboxes': {
         it('contains divs, option, label, input', () => { 
           const divs = renderedSubcomponent.find('div');
@@ -170,7 +171,13 @@ for(let type in optionTypes){ //zapisuję typ opcji w zmiennej type.
           const inputWithTypeCheckbox = renderedSubcomponent.find('input[type="checkbox"]');// podpowiedź z w/w strony Enzyme na przykładzie a[href="foo"]
           expect(inputWithTypeCheckbox.length).toBe(2);
         });
-        //zrobić test interakcji w piątek !!
+        
+        it('should run setOrderOption function on change', () => {
+          renderedSubcomponent.find('input[value="'+ testValue +'"]').simulate('change', {currentTarget: {checked: true}});
+          console.log('input Checkboxes:', renderedSubcomponent.find('input[value="'+ testValue +'"]').debug());
+          expect(mockSetOrderOption).toBeCalledTimes(1); 
+          expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: [mockProps.currentValue, testValue] }); 
+        });
 
         break;
       }
@@ -204,32 +211,30 @@ for(let type in optionTypes){ //zapisuję typ opcji w zmiennej type.
           expect(inputWithTypeText.length).toBe(1);
         });
 
-        //NIE PRZECHODZI
+        //NIE PRZECHODZI - czy robić onChange dla inputa w komponencie OrderOptionText? może coś innego?
         it('should run setOrderOption function on change', () => {
           renderedSubcomponent.find('input').simulate('change', {currentTarget: {value: testValue}});
           expect(mockSetOrderOption).toBeCalledTimes(1); 
           expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue }); 
         });
-        
         break;
       }
 
       case 'date': {
         it('contains datepicker', () => { 
-          const datepicker = renderedSubcomponent.find('.datepicker'); 
+          const datepicker = renderedSubcomponent.find(DatePicker); 
           expect(datepicker.length).toBe(1);
         });
 
-        //NIE PRZECHODZI
-        //BEZ IMPORTU Datepickera ?.......
-        // it('should run setOrderOption function on change', () => {
-        //   renderedSubcomponent.find('.datepicker').simulate('change', testValue);
-        //   expect(mockSetOrderOption).toBeCalledTimes(1); 
-        //   expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue }); 
-        // });
+        //NIE PRZECHODZI 
+        it('should run setOrderOption function on change', () => {
+          renderedSubcomponent.find(DatePicker).simulate('change', testValue);
+          //console.log('DatePicker:', renderedSubcomponent.find(DatePicker).debug());
+          expect(mockSetOrderOption).toBeCalledTimes(1); 
+          expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue }); 
+        });
         break;
       }
-
     }
   });
 }
