@@ -25,7 +25,7 @@ const sendOrder = (options, tripCost, tripId, tripName, countryCode) => {
   console.log('przychodzi payload.contact:', payload.contact);
 
   if(payload.name=='' || payload.contact==''){
-    return;
+    return; //nie powinniśmy umożliwiać wysłania zamówienia, jeśli pola name i contact są puste.
   }
 
   const url = settings.db.url + '/' + settings.db.endpoint.orders;

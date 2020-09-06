@@ -206,12 +206,10 @@ for(let type in optionTypes){ //zapisuję typ opcji w zmiennej type.
         it('contains div, input', () => { 
           const divWithClassNumber = renderedSubcomponent.find('div.number'); // jak łączyć w Enzyme element z klasą - podpowiedź: https://enzymejs.github.io/enzyme/docs/api/selector.html
           expect(divWithClassNumber.length).toBe(1);
-
           const inputWithTypeText = renderedSubcomponent.find('input');// podpowiedź z w/w strony Enzyme na przykładzie a[href="foo"]
           expect(inputWithTypeText.length).toBe(1);
         });
 
-        //NIE PRZECHODZI - czy robić onChange dla inputa w komponencie OrderOptionText? może coś innego?
         it('should run setOrderOption function on change', () => {
           renderedSubcomponent.find('input').simulate('change', {currentTarget: {value: testValue}});
           expect(mockSetOrderOption).toBeCalledTimes(1); 
@@ -225,8 +223,7 @@ for(let type in optionTypes){ //zapisuję typ opcji w zmiennej type.
           const datepicker = renderedSubcomponent.find(DatePicker); 
           expect(datepicker.length).toBe(1);
         });
-
-        //NIE PRZECHODZI 
+ 
         it('should run setOrderOption function on change', () => {
           renderedSubcomponent.find(DatePicker).simulate('change', testValue);
           //console.log('DatePicker:', renderedSubcomponent.find(DatePicker).debug());
