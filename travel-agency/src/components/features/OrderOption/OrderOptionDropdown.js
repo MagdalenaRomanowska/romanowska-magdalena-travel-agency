@@ -8,7 +8,7 @@ const OrderOptionDropdown = ({values, required, currentValue, setOptionValue}) =
     className={styles.dropdown}
     value={currentValue}
     onChange={event => setOptionValue(event.currentTarget.value)} //do eventu zmiany wartości (onChange) przypisaliśmy funkcję strzałkową. Ta funkcja przyjmuje event jako argument i zwraca wywołanie funkcji setOptionValue, której argumentem jest wartość elementu.
-  >{console.log(currentValue)}
+  >
     {required ? '' : (  //blok kodu, który sprawdza, czy props required jest prawdziwy.
       <option key='null' value=''>---</option> //Jeśli tak, wstawia pusty ciąg znaków, ale jeśli jest fałszywy (albo nie jest ustawiony), to zostanie wyrenderowany <option> z pustą wartością i tekstem ---.
       //Wykorzystujemy ten zabieg, ponieważ jeśli w pricing.json opcja ma ustawione "required": true, to powinny być do dyspozycji tylko wartości zdefiniowane w tym pliku. Jeśli jednak opcja nie jest wymagana, chcemy dodać <option>, który pozwoli na brak wyboru, czyli rezygnację z tej opcji.

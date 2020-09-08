@@ -6,7 +6,6 @@ const select = {
   title: '.title',
   promoDescription: '.promoDescription',
 };
-
 const mockProps = { //atrapy propsów.
   title: 'title',
   promoDescription: 'promoDescription',

@@ -8,7 +8,6 @@ describe('Component OrderOption', () => {
   it('should render without crashing', () => {
     const component = shallow(<OrderOption type='abc' name='abcd' />);
     expect(component).toBeTruthy();
-    console.log(component.debug());
   });
 
   it('should return empty object if called without required props', () => {
@@ -22,7 +21,6 @@ describe('Component OrderOption', () => {
   //polecenie: test, który upewni się, że w tytule wyświetla się zawartość propsa name.
   it('should render props name in title', () => {
     const component = shallow(<OrderOption type='icons' name='abcd' />);
-    //console.log('Component tested: ', component.debug());//wygląd komponentu, metoda Shallowwrapper, podpowiedź: https://enzymejs.github.io/enzyme/docs/api/ShallowWrapper/debug.html
     expect(component.find('.title').text()).toEqual('abcd');
   });
 });
@@ -87,13 +85,6 @@ for(let type in optionTypes){ //zapisuję typ opcji w zmiennej type.
       subcomponent = component.find(optionTypes[type]);//musieliśmy najpierw w wyrenderowanym komponencie OrderOption znaleźć subkomponent za pomocą metody .find. Jako selektora użyliśmy w tym wypadku po prostu nazwy subkomponentu.
       renderedSubcomponent = subcomponent.dive(); //metoda .dive wyrenderowała subkomponenty.
     });
-
-    /* common tests */ 
-    // it('passes dummy test', () => {
-    //   //console.log(component.debug());
-    //   console.log(subcomponent.debug());
-    //   expect(1).toBe(1);
-    // });
 
     it(`renders ${optionTypes[type]}`, () => { //dla każdego subkomponentu sprawdzamy, czy w ogóle się renderuje. 
       expect(subcomponent).toBeTruthy();
@@ -174,7 +165,6 @@ for(let type in optionTypes){ //zapisuję typ opcji w zmiennej type.
         
         it('should run setOrderOption function on change', () => {
           renderedSubcomponent.find('input[value="'+ testValue +'"]').simulate('change', {currentTarget: {checked: true}});
-          console.log('input Checkboxes:', renderedSubcomponent.find('input[value="'+ testValue +'"]').debug());
           expect(mockSetOrderOption).toBeCalledTimes(1); 
           expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: [mockProps.currentValue, testValue] }); 
         });
@@ -226,7 +216,6 @@ for(let type in optionTypes){ //zapisuję typ opcji w zmiennej type.
  
         it('should run setOrderOption function on change', () => {
           renderedSubcomponent.find(DatePicker).simulate('change', testValue);
-          //console.log('DatePicker:', renderedSubcomponent.find(DatePicker).debug());
           expect(mockSetOrderOption).toBeCalledTimes(1); 
           expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue }); 
         });

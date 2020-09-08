@@ -5,8 +5,7 @@ import Icon from '../../common/Icon/Icon';
 import {formatPrice} from '../../../utils/formatPrice';
 
 const OrderOptionIcons = ({values, currentValue, required, setOptionValue}) => (
-  <div className={styles.icon}>{console.log(currentValue)}
-    
+  <div className={styles.icon}>    
     {required ? '' : (  //blok kodu, który sprawdza, czy props required jest prawdziwy.
       <option key='null' value=''>
         <div className={styles.icon}
@@ -22,8 +21,7 @@ const OrderOptionIcons = ({values, currentValue, required, setOptionValue}) => (
     {values.map(value => (
       <div className={currentValue != value.id ? styles.icon : styles.iconActive} //blok kodu, który sprawdza, czy currentValue jest prawdziwy.
         key={value.id}
-        onClick={ () => setOptionValue(value.id)}
-      >{console.log(value.id, currentValue)}
+        onClick={ () => setOptionValue(value.id)}>
         <Icon name={value.icon}/> {value.name} {formatPrice(value.price)}
       </div>
       
