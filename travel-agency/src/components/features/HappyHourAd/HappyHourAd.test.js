@@ -6,10 +6,19 @@ const select = {
   title: '.title',
   promoDescription: '.promoDescription',
 };
+
 const mockProps = { //atrapy propsów.
   title: 'title',
   promoDescription: 'promoDescription',
 };
+
+//Pierwsza linia importuje plik formatTime – zamiast import stosujemy jest.requireActual, aby upewnić się, że importujemy faktyczny kod tego pliku, a nie jego zmockowaną wersję.
+// Następnie zmieniamy znajdującą się w nim funkcję formatTime na mock funkcji, który zawsze zwróci argument przekazany tej funkcji.
+//Dzięki temu, kiedy w naszym komponencie wykonujemy funkcję formatTime z jakimś argumentem, to po prostu zwróci ona otrzymany argument. 
+beforeAll(() => { //wykonuje operacje przed wszystkimi testami w tym describe.
+  const utilsModule = jest.requireActual('../../../utils/formatTime.js');
+  utilsModule.formatTime = jest.fn(seconds => seconds);
+});
   
 describe('Component HappyHourAd', () => {
   it('should render without crashing', () => {
@@ -66,7 +75,7 @@ const checkDescriptionAtTime = (time, expectedDescription) => {//checkDescriptio
     global.Date = trueDate;
   });
 };
-afterAll(() => { //z dok. Jesta: Runs a function after all the tests in this file have completed.
+afterAll(() => { //z dok. Jesta: wykonuje operacje po wszystkich testach w tym describe.
   describe('Component HappyHourAd with mocked Date', () => {
     checkDescriptionAtTime('11:57:58', '122');
     checkDescriptionAtTime('11:59:59', '1');
