@@ -26,7 +26,7 @@ export const removeTags = payload => ({ payload, type: REMOVE_TAGS });
 
 // reducer
 export default function reducer(statePart = [], action = {}) {
-  console.log('statePart:', statePart);
+  
   switch (action.type) {
     case CHANGE_PHRASE: {
       return {
@@ -56,39 +56,20 @@ export default function reducer(statePart = [], action = {}) {
         ...statePart,
         ...statePart.tags.push(action.payload[0]), //action.payload to nowy tag (kliknięty).
       };
-      // const ffff = {
-      //  ...statePart,
-      // };
-      // ffff.tags.push(action.payload[0]);
-      // console.log('ffff: ', ffff );
-      // return ffff;
-      
+     
     }
 
     case REMOVE_TAGS: {
       const staryStanFiltrow = {
         ...statePart,
       };
-      console.log('staryStanFiltrow: ', staryStanFiltrow.tags );
-      console.log('usuwany action.payload: ', action.payload);
       const nowyStanTagow = staryStanFiltrow.tags.filter((element) => (element !== action.payload[0]));
       staryStanFiltrow.tags = nowyStanTagow;
       return staryStanFiltrow;
-
-      // const staryStanFiltrow = {
-      //   ...statePart,
-      // };
-      // console.log('staryStanFiltrow: ', staryStanFiltrow.tags );
-      // console.log('usuwany action.payload: ', action.payload);
-      // const nowyStanTagow = staryStanFiltrow.tags.filter((element) => (element !== action.payload[0]));
-      // staryStanFiltrow.tags = nowyStanTagow;
-      // return staryStanFiltrow;
     }
-
     
     // TODO - handle other action types
     default:
       return statePart;
-  }   
-  
+  }    
 }
