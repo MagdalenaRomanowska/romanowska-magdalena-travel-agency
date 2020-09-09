@@ -1,14 +1,17 @@
-export const formatTime = (parameter) => parameter==undefined 
-|| isNaN(parameter) 
-|| parameter < 0 ? null : ((('00' + (Math.floor(parameter/3600))).substr(-2,2))
-+ ':' + (('00' + (Math.floor((parameter/60)%60))).substr(-2,2)) 
-+ ':' + (('00' + (Math.floor(parameter%60))).substr(-2,2)));
-
-//isNaN(par1) - stąd: https://mkyong.com/javascript/check-if-variable-is-a-number-in-javascript/
-// Math.floor(parameter%60) - seconds; parameter%60 - reszta z dzielenia przez 60.
+export const formatTime = parameter => {
+    
+  let hours = (('00' + Math.floor(parameter/3600)).substr(-2,2));
+  let minutes = (('00' + Math.floor((parameter/60)%60)).substr(-2,2));
+  let seconds = (('00' + Math.floor(parameter%60)).substr(-2,2));
+  let time = hours + ':' +  minutes + ':' + seconds;
+  
+  return parameter==undefined 
+  || isNaN(parameter) 
+  || parameter < 0 ? null : time;
+};
 
 // zero padding: https://stackoverflow.com/questions/10073699/pad-a-number-with-leading-zeros-in-javascript
-// ("0000" + num).substr(-4,4); //short and sweet - 1st comment.
+// ("0000" + num).substr(-4,4); // 1st comment.
 // hours:   (('00' + (Math.floor(parameter/3600))).substr(-2,2))
 // minutes: (('00' + (Math.floor((parameter/60)%60))).substr(-2,2))
 // seconds: (('00' + (Math.floor(parameter%60))).substr(-2,2))
