@@ -64,7 +64,7 @@ const checkDescriptionAfterTime = (time, delaySeconds, expectedDescription) => {
   });
 };
 describe('Component HappyHourAd with mocked Date and delay', () => {
-  checkDescriptionAfterTime('11:57:58', 2, '120'); //środkowa wartość to delay - opóźnienie.
-  checkDescriptionAfterTime('11:59:58', 1, '1');
-  checkDescriptionAfterTime('13:00:00', 60 * 60, 22 * 60 * 60 + '');
+  checkDescriptionAfterTime('11:57:58', 2, '00:02:00'); //środkowa wartość to delay - opóźnienie.
+  checkDescriptionAfterTime('11:59:58', 1, '00:00:01');//o godz. 11:59:59 brakuje 1 sec. do godz. 12:00.
+  checkDescriptionAfterTime('13:00:00', 60 * 60, '22:00:00'); //o godz. 14:00 brakuje 22h do godz. 12:00.
 });

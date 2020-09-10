@@ -1,5 +1,5 @@
 export const formatTime = parameter => { 
-  if (parameter==undefined || Number.isNaN(parameter) || parameter < 0){
+  if (isNaN(parameter) || parameter < 0){
     return null;
   } 
   let hours = (('00' + Math.floor(parameter/3600)).substr(-2,2));
