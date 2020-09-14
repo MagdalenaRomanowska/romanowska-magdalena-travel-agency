@@ -11,9 +11,6 @@ class DaysToSummer extends React.Component {
   constructor(){ //odświeżanie widoku komponentu co 1 dobę.
     super();
     this.state = {date: new Date()};
-    // setInterval(() => {
-    //   this.forceUpdate();
-    // }, 1000 * 60 * 60 * 24); //1000-sekunda.60*60*24 - doba.
   }
 
   componentDidMount() {
