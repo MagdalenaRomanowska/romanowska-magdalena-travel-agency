@@ -1,7 +1,7 @@
 ### **General info** 
 - App made for eductional purposes during Web Developer Bootcamp 2020.
 
-- One can see this project here:
+- One can see this project here :
 https://romanowska-travel-agency.herokuapp.com/
 
 ### **Running app**
